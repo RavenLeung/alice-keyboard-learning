@@ -91,3 +91,17 @@
 - **Joe Scotto** YouTube 手搓键盘系列（新手向标杆）
 - **Ben Vallack** 矩阵接线视频（二极管和 NKRO 原理）
 - B 站搜"手搓键盘 / 手焊键盘 / Alice 键盘 DIY"
+
+### 电路图参考
+
+- QMK hand_wire 教程接线示意：https://docs.qmk.fm/hand_wire
+- QMK 官方仓库真实 Alice 矩阵图：`qmk/qmk_firmware` 的 `keyboards/aliceh66/pianoforte/matrix_diagram.md`
+- 完整开源 Alice 项目（含 KiCad 原理图）：
+  - toro-board（60% Alice + RP2040 Pico）：https://github.com/idksarah/toro-board
+  - alice60（手搓 Alice + nRF52840）：https://github.com/alan0ford/alice60
+  - poppy（70% Alice，THT 元件）：https://github.com/jamerhar/poppy
+  - konikey（56 键 Alice）：https://github.com/konisteel/konikey
+  - OpenErgo：https://github.com/ojthetiny/OpenErgo
+- K2 Pro 只有外壳/定位板 3D 文件（无电气原理图）：https://github.com/Keychron/Keychron-Keyboards-Hardware-Design
+  - 它的"逻辑电路图"在 QMK 源码里：info.json 的 matrix_pins + matrix.c（74HC595 移位寄存器）
+- 看原理图用免费版 KiCad（.kicad_sch 原理图 / .kicad_pcb 布线）
