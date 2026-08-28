@@ -15,32 +15,48 @@
 
 判断方法：铭牌型号带 **Pro** 的 K 系列支持 QMK。老 K 系列只有社区移植（[K3v2 SonixQMK](https://github.com/timgdx/qmk_k3v2)、[K10 Max 社区固件](https://github.com/k0nker/qmk_firmware_k10max)），有风险，新手不碰。
 
-## 第一步：环境搭建（用 Keychron 官方 QMK 分支）
+## 第一步：环境搭建（注意：用 bluetooth_playground 分支！）
 
-K2 Pro 固件在 [Keychron 官方 QMK 分支](https://github.com/Keychron)，内置自家 BLE 支持，**不要用 QMK 主仓库**：
+K2 Pro 的固件在 [Keychron 官方 QMK 分支](https://github.com/Keychron) 的 **`bluetooth_playground` 分支**上——默认分支（2025q3）里**没有** k2_pro，这是最容易踩的坑。不要用 QMK 主仓库：
 
 ```bash
-qmk setup keychron/qmk_firmware -b master
-qmk compile -kb keychron/k2_pro/ansi -km default   # 先编译默认固件验证环境
+qmk setup -b bluetooth_playground keychron/qmk_firmware
+# 如果已经 setup 过：cd qmk_firmware && git fetch && git checkout bluetooth_playground
+
+# 编译（变体按下面的表选）
+make keychron/k2_pro/ansi/rgb:default
 ```
 
-（目录名以 fork 实际结构为准，`keychron/k2_pro/` 下可能分 ansi/iso 或带 RGB 变体。）
+## 确认你的变体（先选对再编译）
+
+`keyboards/keychron/k2_pro/` 下按 **配列 × 背光** 分 4 个变体（另有 jis 日文配列）：
+
+| 变体 | 判断方法 | 编译目标 |
+|---|---|---|
+| ansi/rgb | 一字回车 + 彩色 RGB 背光 | `keychron/k2_pro/ansi/rgb` |
+| ansi/white | 一字回车 + 单色白背光 | `keychron/k2_pro/ansi/white` |
+| iso/rgb | 倒 L 形回车 + RGB | `keychron/k2_pro/iso/rgb` |
+| iso/white | 倒 L 形回车 + 白背光 | `keychron/k2_pro/iso/white` |
+
+判断方法：看**回车键形状**（一字 = ANSI，倒 L = ISO）；开背光看**颜色**（彩色 = RGB，单色 = White）。国内市售 K2 Pro 基本是 ansi/rgb。
 
 ## 第二步：刷机（练手核心环节）
 
-官方教程：[K2 Pro 恢复出厂与刷固件](https://keychron.de/de/blogs/archived/k2-pro-factory-reset-and-firmware-flash)（[其他语言版本](https://keychron.pt/blogs/archived/how-to-factory-reset-and-flash-firmware-for-your-k2-pro-keyboard)）
+官方 readme 里 K2 Pro 的进 bootloader 方法（K2 Pro 是无线键盘，**靠模式开关进，不是空格+B**）：
 
-1. **备份原厂固件**：去 Keychron 官网下载 K2 Pro 原厂固件存档，刷坏能还原
-2. **进 bootloader**：拔 USB 线 → **按住空格+B** → 插 USB 线 → 电脑出现 DFU 设备
-3. **烧录**：`qmk flash`（或 QMK Toolbox）
+1. **备份原厂固件**：固件就在仓库里！`keyboards/keychron/k2_pro/firmware/` 下有对应变体的 `keychron_k2_pro_ansi_rgb_via.bin` 等文件（[在线查看](https://github.com/Keychron/qmk_firmware/tree/bluetooth_playground/keyboards/keychron/k2_pro/firmware)），下载和你键盘变体对应的 .bin 存好，刷坏能还原
+2. **进 bootloader**：USB 线连电脑 → 模式开关拨到 **Off** → **按住 Esc**（或空格下方的复位小孔）→ 把模式开关拨到 **Cable** → 电脑出现 DFU 设备
+3. **烧录**：`make keychron/k2_pro/ansi/rgb:default:flash`（或 `qmk flash -kb keychron/k2_pro/ansi/rgb -km default`，也可用 QMK Toolbox）
 4. **验证**：能正常打字 = 闭环打通 ✅
 
 **反复进出 bootloader 练几次** —— 以后焊错线救砖全靠这个肌肉记忆。
 
+官方教程参考：[K2 Pro 恢复出厂与刷固件](https://keychron.de/de/blogs/archived/k2-pro-factory-reset-and-firmware-flash)（[其他语言版本](https://keychron.pt/blogs/archived/how-to-factory-reset-and-flash-firmware-for-your-k2-pro-keyboard)）
+
 ## 第三步：在它上面练什么
 
 1. 改 keymap：层、组合键（combo）、宏，反复编译刷入
-2. 用 VIA：刷带 VIA 的固件后免编译改键
+2. 用 VIA：原厂固件已内置 VIA（.bin 文件名带 _via），免编译改键；VIA 定义在 `keychron/k2_pro/via_json/`（如 `k2_pro_ansi_rgb.json`）
 3. 读 `keychron/k2_pro/` 下的 `info.json`：看真实的行列引脚、二极管方向定义 —— **这就是以后手搓 Alice 要自己写的东西，先看标准答案**
 4. 调 RGB 默认值等固件配置
 
