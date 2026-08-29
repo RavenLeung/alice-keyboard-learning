@@ -1,25 +1,28 @@
 # 今晚任务清单（回家继续）
 
 > 目标：把"软件侧练手"正式启动 —— K2 Pro 编译 + 刷机跑通一轮。
+> ✅ 2026-08-29 已完成首轮，完整操作归档见 [docs/05-macos-qmk-setup-flash-log.md](docs/05-macos-qmk-setup-flash-log.md)。
 
 ## 今晚必做（约 1–2 小时）
 
 ### 1. 环境搭建（注意：K2 Pro 在 bluetooth_playground 分支！）
-- [ ] Windows 装 **QMK MSYS**（官网 qmk.fm 下载安装包）；或 Linux/macOS 用 pip 装 qmk
-- [ ] `qmk setup -b bluetooth_playground keychron/qmk_firmware`（Keychron 官方分支 + 正确分支，默认分支里没有 K2 Pro）
-- [ ] 确认键盘变体：回车键形状（一字=ANSI / 倒 L=ISO）+ 背光颜色（彩色=RGB / 单色=White）→ 国内市售基本是 **ansi/rgb**
-- [ ] `make keychron/k2_pro/ansi/rgb:default` 编译通过 ✅（变体不符就换 ansi/white、iso/rgb 等）
-- [ ] 查实际路径：`qmk list-keyboards | grep -i k2_pro`
+- [x] macOS 用 venv + pip 装 qmk（`python3 -m venv ~/.qmk-venv && pip install qmk`，qmk 1.2.0）
+- [x] `qmk setup -b bluetooth_playground keychron/qmk_firmware`（Keychron 官方分支 + 正确分支，默认分支里没有 K2 Pro）
+- [x] 确认键盘变体：**ansi/rgb**（一字回车 + 彩色 RGB）
+- [x] `qmk compile -kb keychron/k2_pro/ansi/rgb -km default` 编译通过 → `keychron_k2_pro_ansi_rgb_default.bin`（58944B，已存 build/）
+- [x] 查实际路径：`keychron/k2_pro/ansi/rgb` ✓
+- [x] 工具链：`arm-none-eabi-gcc@8` + `arm-none-eabi-binutils`（brew 已装，需加入 PATH，见 docs/05 §2.3）
+- [ ] 补充：`avr-gcc` 未装（阶段 2 Pro Micro 需要，`brew tap osx-cross/avr && brew install avr-gcc@8`，源码编译 30min+）
 
 ### 2. 备份原厂固件（仓库里就有！）
-- [ ] 从 [keyboards/keychron/k2_pro/firmware/](https://github.com/Keychron/qmk_firmware/tree/bluetooth_playground/keyboards/keychron/k2_pro/firmware) 下载对应变体的 `keychron_k2_pro_ansi_rgb_via.bin`，存好备用
-- [ ] 先**不要刷**，只确认 .bin 已下载
+- [x] 已下载 `keychron_k2_pro_ansi_rgb_via.bin` → `stock-firmware/`（58284B，SHA256: 830c4b49...）
+- [x] 确认 .bin 已下载
 
 ### 3. 刷机第一轮（核心练习）
-- [ ] USB 连电脑 → 模式开关拨到 **Off** → **按住 Esc**（或空格下方复位孔）→ 开关拨到 **Cable** → 确认电脑出现 DFU 设备
-- [ ] `make keychron/k2_pro/ansi/rgb:default:flash`（或 `qmk flash -kb keychron/k2_pro/ansi/rgb -km default`，也可用 QMK Toolbox）
-- [ ] 验证能正常打字
-- [ ] 再练一次：重复"进 bootloader → 刷回默认固件 → 验证"
+- [x] USB 连电脑 → 模式开关拨到 **Off** → **按住 Esc** → 开关拨到 **Cable** → 确认出现 DFU 设备（`dfu-util -l` 见 `0483:df11` STM32 BOOTLOADER）
+- [x] `qmk flash -kb keychron/k2_pro/ansi/rgb -km default` 刷入成功（58928B，DFU 模式下载完成，自动重启回正常模式）
+- [x] 验证能正常打字（2026-08-29 用户确认：刷机后正常打字，固件含蓝牙支持）
+- [ ] 再练一次：重复"进 bootloader → 刷回默认固件 → 验证"（可选，下次补）
 
 ### 4. 小改一轮（可选，时间够就做）
 - [ ] 编辑 `keyboards/keychron/k2_pro/ansi/rgb/keymaps/default/keymap.c`，改一个键位

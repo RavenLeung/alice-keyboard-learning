@@ -19,7 +19,7 @@
 
 - [x] 无线方案调研（蓝牙 vs 2.4G）→ docs/01
 - [x] 分体键盘架构调研（单 dongle 星型 / 有线分体）→ docs/02
-- [ ] 阶段 1：K2 Pro 编译 + 刷机（**今晚任务**）→ TODO.md
+- [x] 阶段 1：K2 Pro 编译 + 刷机跑通（2026-08-29 第一轮刷机成功）→ docs/05 + TODO.md
 - [ ] 阶段 2：焊接物料下单
 - [ ] 阶段 3：手搓 Alice
 
@@ -31,6 +31,7 @@
 | [docs/02-split-keyboard-architecture.md](docs/02-split-keyboard-architecture.md) | 分体键盘架构：无线星型 vs 有线分体 |
 | [docs/03-beginner-roadmap.md](docs/03-beginner-roadmap.md) | 从零开始练手路线（含物料清单、资源链接） |
 | [docs/04-keychron-k2pro-guide.md](docs/04-keychron-k2pro-guide.md) | Keychron K2 Pro 练手指南（软件侧） |
+| [docs/05-macos-qmk-setup-flash-log.md](docs/05-macos-qmk-setup-flash-log.md) | macOS QMK 环境搭建 + K2 Pro 刷机操作归档（含踩坑记录） |
 | [TODO.md](TODO.md) | 今晚回家行动清单 |
 
 ## 关键结论速查
