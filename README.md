@@ -32,6 +32,7 @@
 | [docs/03-beginner-roadmap.md](docs/03-beginner-roadmap.md) | 从零开始练手路线（含物料清单、资源链接） |
 | [docs/04-keychron-k2pro-guide.md](docs/04-keychron-k2pro-guide.md) | Keychron K2 Pro 练手指南（软件侧） |
 | [docs/05-macos-qmk-setup-flash-log.md](docs/05-macos-qmk-setup-flash-log.md) | macOS QMK 环境搭建 + K2 Pro 刷机操作归档（含踩坑记录） |
+| [docs/06-stage2-prep-guide.md](docs/06-stage2-prep-guide.md) | 阶段 2 准备：二极管/鬼键原理 + RP2040 引脚规划 + 澳洲购物清单 |
 | [TODO.md](TODO.md) | 今晚回家行动清单 |
 
 ## 关键结论速查
