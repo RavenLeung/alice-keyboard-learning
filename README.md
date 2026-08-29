@@ -34,6 +34,7 @@
 | [docs/05-macos-qmk-setup-flash-log.md](docs/05-macos-qmk-setup-flash-log.md) | macOS QMK 环境搭建 + K2 Pro 刷机操作归档（含踩坑记录） |
 | [docs/06-stage2-prep-guide.md](docs/06-stage2-prep-guide.md) | 阶段 2 准备：二极管/鬼键原理 + RP2040 引脚规划 + 澳洲购物清单 |
 | [docs/07-firmware-build-ingredients.md](docs/07-firmware-build-ingredients.md) | QMK 固件编译"原材料"拆解（4 层配方 + 工具链，以 K2 Pro 为例） |
+| [reference/k2-pro-source/](reference/k2-pro-source/REFERENCE.md) | K2 Pro 官方固件源码参考副本（matrix.c/config.h/keymap.c 等） |
 | [TODO.md](TODO.md) | 今晚回家行动清单 |
 
 ## 关键结论速查
