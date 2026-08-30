@@ -35,6 +35,7 @@
 | [docs/06-stage2-prep-guide.md](docs/06-stage2-prep-guide.md) | 阶段 2 准备：二极管/鬼键原理 + RP2040 引脚规划 + 澳洲购物清单 |
 | [docs/07-firmware-build-ingredients.md](docs/07-firmware-build-ingredients.md) | QMK 固件编译"原材料"拆解（4 层配方 + 工具链，以 K2 Pro 为例） |
 | [docs/08-k2pro-bluetooth-architecture.md](docs/08-k2pro-bluetooth-architecture.md) | K2 Pro 蓝牙方案源码拆解（双芯片架构、配对/电池/低功耗） |
+| [docs/09-rotary-encoder-guide.md](docs/09-rotary-encoder-guide.md) | DIY 旋钮方案：EC11 硬件 + QMK ENCODER_MAP + 达芬奇/LR 滑块控制 |
 | [reference/k2-pro-source/](reference/k2-pro-source/REFERENCE.md) | K2 Pro 官方固件源码参考副本（matrix.c/config.h/keymap.c 等） |
 | [TODO.md](TODO.md) | 今晚回家行动清单 |
 
